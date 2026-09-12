@@ -7,60 +7,43 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
         body { background: #0a0a0f; color: #fff; min-height: 100vh; overflow-x: hidden; position: relative; }
-
         .bg-bubbles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
         .bubble { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s infinite ease-in-out; }
         .bubble-1 { width: 500px; height: 500px; background: radial-gradient(circle, #33ff33, transparent); top: -200px; left: -200px; }
         .bubble-2 { width: 600px; height: 600px; background: radial-gradient(circle, #00ccff, transparent); bottom: -300px; right: -200px; animation-delay: 5s; }
         .bubble-3 { width: 400px; height: 400px; background: radial-gradient(circle, #8b5cf6, transparent); top: 40%; right: 20%; animation-delay: 10s; }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, -50px) scale(1.1); }
-            66% { transform: translate(-50px, 50px) scale(0.9); }
-        }
-
+        @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(50px, -50px) scale(1.1); } 66% { transform: translate(-50px, 50px) scale(0.9); } }
         header { position: fixed; top: 0; left: 0; right: 0; padding: 18px 40px; background: rgba(10, 10, 20, 0.6); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(51, 255, 51, 0.1); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
-
         .logo { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: bold; }
         .logo-icon { font-size: 28px; animation: spin 10s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .logo-text .py { color: #33ff33; text-shadow: 0 0 20px #33ff33; }
         .logo-text .tools { color: #fff; }
-
         nav { display: flex; gap: 30px; }
         nav a { color: #ccc; text-decoration: none; font-size: 15px; transition: all 0.3s; position: relative; }
         nav a:hover { color: #33ff33; }
         nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, #33ff33, #00ccff); transition: width 0.3s; }
         nav a:hover::after { width: 100%; }
-
         .hero { padding: 180px 40px 100px; text-align: center; position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(51, 255, 51, 0.1); border: 1px solid rgba(51, 255, 51, 0.3); border-radius: 30px; color: #33ff33; font-size: 14px; margin-bottom: 30px; animation: slideDown 0.8s ease-out; }
         .badge-dot { width: 8px; height: 8px; background: #33ff33; border-radius: 50%; animation: pulseDot 2s infinite; box-shadow: 0 0 10px #33ff33; }
         @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-
         .hero h1 { font-size: 72px; margin-bottom: 30px; font-weight: 800; line-height: 1.1; animation: slideDown 0.8s ease-out 0.2s both; }
         .hero h1 .gradient { background: linear-gradient(135deg, #33ff33, #00ccff, #8b5cf6); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 3s ease infinite; }
         @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-
         .hero-subtitle { font-size: 32px; color: #aaa; margin-bottom: 50px; min-height: 50px; animation: slideDown 0.8s ease-out 0.4s both; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; }
         .hero-subtitle .static { color: #ccc; }
-
         .animated-text-wrapper { display: inline-block; position: relative; min-width: 320px; height: 50px; text-align: left; overflow: hidden; vertical-align: middle; }
         .animated-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; opacity: 0; transform: translateY(100%); transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); font-weight: 700; white-space: nowrap; }
         .animated-text.active { opacity: 1; transform: translateY(0); }
         .animated-text.exit { opacity: 0; transform: translateY(-100%); }
-
         .animated-text.color-1 { background: linear-gradient(135deg, #33ff33, #00cc88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .animated-text.color-2 { background: linear-gradient(135deg, #00ccff, #0088ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .animated-text.color-3 { background: linear-gradient(135deg, #ff33aa, #ff0088); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .animated-text.color-4 { background: linear-gradient(135deg, #ffaa00, #ff6600); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .animated-text.color-5 { background: linear-gradient(135deg, #8b5cf6, #6d28d9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
         .hero-buttons { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; animation: slideDown 0.8s ease-out 0.6s both; }
-
         .btn { padding: 16px 42px; border-radius: 14px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 10px; position: relative; overflow: hidden; }
         .btn-primary { background: linear-gradient(135deg, #33ff33, #00cc88); color: #000; box-shadow: 0 10px 40px rgba(51, 255, 51, 0.3); }
         .btn-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
@@ -68,12 +51,10 @@
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(51, 255, 51, 0.5); }
         .btn-secondary { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); }
         .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); }
-
         .section { padding: 100px 40px; max-width: 1400px; margin: 0 auto; }
         .section-title { font-size: 48px; text-align: center; margin-bottom: 15px; font-weight: 800; }
         .section-title .gradient { background: linear-gradient(135deg, #fff, #33ff33); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .section-subtitle { text-align: center; color: #888; font-size: 17px; margin-bottom: 70px; }
-
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 30px; }
         .card { background: rgba(30, 30, 50, 0.3); backdrop-filter: blur(20px); border: 1px solid rgba(51, 255, 51, 0.1); border-radius: 24px; padding: 40px; transition: all 0.4s; position: relative; overflow: hidden; }
         .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #33ff33, #00ccff); transform: scaleX(0); transform-origin: left; transition: transform 0.5s; }
@@ -84,12 +65,10 @@
         .card-title { font-size: 32px; margin-bottom: 10px; color: #fff; font-weight: 700; }
         .card-version { display: inline-block; padding: 5px 14px; background: rgba(51, 255, 51, 0.15); color: #33ff33; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(51, 255, 51, 0.3); }
         .card-description { color: #aaa; font-size: 15px; line-height: 1.7; margin-bottom: 30px; }
-
         .features { list-style: none; margin-bottom: 35px; }
         .features li { padding: 10px 0; color: #ccc; font-size: 14px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
         .features li:last-child { border-bottom: none; }
         .features li::before { content: '✓'; color: #33ff33; font-weight: bold; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
         .card-actions { display: flex; gap: 15px; flex-wrap: wrap; }
         .btn-download { flex: 1; min-width: 180px; padding: 16px 25px; background: linear-gradient(135deg, #33ff33, #00cc88); color: #000; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; overflow: hidden; }
         .btn-download::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left 0.5s; }
@@ -97,7 +76,6 @@
         .btn-download:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(51, 255, 51, 0.5); }
         .btn-info { padding: 16px 25px; background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
         .btn-info:hover { background: rgba(255, 255, 255, 0.1); }
-
         .guide { background: rgba(20, 20, 40, 0.5); backdrop-filter: blur(20px); border: 1px solid rgba(51, 255, 51, 0.15); border-radius: 24px; padding: 50px; }
         .guide-title { font-size: 26px; margin-bottom: 30px; color: #33ff33; display: flex; align-items: center; gap: 12px; }
         .guide-step { display: flex; gap: 25px; padding: 28px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s; }
@@ -107,13 +85,10 @@
         .step-content h3 { font-size: 20px; margin-bottom: 10px; color: #fff; }
         .step-content p { color: #aaa; line-height: 1.7; font-size: 15px; }
         .step-content code { background: rgba(51, 255, 51, 0.1); color: #33ff33; padding: 3px 10px; border-radius: 6px; font-family: 'Consolas', monospace; font-size: 13px; border: 1px solid rgba(51, 255, 51, 0.2); }
-
         footer { padding: 50px 40px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: 100px; color: #666; font-size: 14px; }
         footer a { color: #33ff33; text-decoration: none; }
-
         .fade-in { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
-
         @media (max-width: 768px) {
             header { padding: 15px 20px; }
             nav { display: none; }
@@ -182,7 +157,6 @@
     <p class="section-subtitle">Выберите что вам нужно</p>
 
     <div class="cards-grid">
-        <!-- PyUnlocker -->
         <div class="card">
             <span class="card-icon">🐍</span>
             <h3 class="card-title">PyUnlocker</h3>
@@ -199,12 +173,11 @@
                 <li>Offline работа через WinRE</li>
             </ul>
             <div class="card-actions">
-                <a href="https://github.com/temshik1g/pytools/releases/download/v1.1/PyUnlocker-v3.0.zip" download class="btn-download">⬇️ Скачать (ZIP)</a>
+                <a href="https://github.com/temshik1g/pytools/releases/download/v2.0/PyUnlocker-v3.0.zip" download class="btn-download">⬇️ Скачать (ZIP)</a>
                 <a href="#guide" class="btn-info">📖 Гайд</a>
             </div>
         </div>
 
-        <!-- FlashU -->
         <div class="card">
             <span class="card-icon">💾</span>
             <h3 class="card-title">FlashU</h3>
@@ -221,7 +194,7 @@
                 <li>Журнал операций</li>
             </ul>
             <div class="card-actions">
-                <a href="https://github.com/temshik1g/pytools/releases/download/v1.1/FlashU_2.0.zip" download class="btn-download">⬇️ Скачать (ZIP)</a>
+                <a href="https://github.com/temshik1g/pytools/releases/download/v2.0/FlashU-v1.1.zip" download class="btn-download">⬇️ Скачать (ZIP)</a>
                 <a href="#guide" class="btn-info">📖 Гайд</a>
             </div>
         </div>
@@ -273,7 +246,7 @@
             <div class="step-number">1</div>
             <div class="step-content">
                 <h3>Скачайте и запустите</h3>
-                <p>Скачайте <code>FlashU_2.0.zip</code>, распакуйте, запустите <code>FlashU.exe</code> <strong>от имени администратора</strong>.</p>
+                <p>Скачайте <code>FlashU-v1.1.zip</code>, распакуйте, запустите <code>FlashU.exe</code> <strong>от имени администратора</strong>.</p>
             </div>
         </div>
 
@@ -344,12 +317,9 @@
         const current = texts[currentIndex];
         current.classList.remove('active');
         current.classList.add('exit');
-
         setTimeout(() => { current.classList.remove('exit'); }, 600);
-
         currentIndex = (currentIndex + 1) % texts.length;
         const next = texts[currentIndex];
-
         setTimeout(() => { next.classList.add('active'); }, 100);
     }
 
